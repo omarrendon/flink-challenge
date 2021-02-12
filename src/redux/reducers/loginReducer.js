@@ -1,7 +1,8 @@
-import { LOG_IN, LOG_OUT } from "../types/Types";
+import { LOG_IN, LOG_OUT, ERROR_LOGIN } from "../types/Types";
 
 const initialState = {
   userData: [],
+  error: false,
 };
 
 export const loginReducer = (state = initialState, action) => {
@@ -18,6 +19,13 @@ export const loginReducer = (state = initialState, action) => {
       };
     }
 
+    case ERROR_LOGIN: {
+      return {
+        ...state,
+        userData: [],
+        error: true,
+      };
+    }
     default:
       return state;
   }

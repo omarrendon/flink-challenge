@@ -8,7 +8,7 @@ import {
   CssBaseline,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../redux/actions/LoginActions";
 import useForm from "../hooks/useForm";
 
@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.login);
   const [formValues, handleInputChange, reset] = useForm({
     user: "",
     password: "",
@@ -49,7 +50,6 @@ const Login = () => {
     event.preventDefault();
     dispatch(loginAction(user, password));
     reset();
-    console.log(user, password);
   };
 
   return (
@@ -61,6 +61,17 @@ const Login = () => {
           Login
         </Typography>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
+          {error === true ? (
+            <Typography
+              variant="h5"
+              color="secondary"
+              style={{ textAlign: "center" }}
+            >
+              Email or Pasword incorrect
+            </Typography>
+          ) : (
+            ""
+          )}
           <TextField
             variant="outlined"
             margin="normal"

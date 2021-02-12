@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { LOG_IN, LOG_OUT } from "../types/Types";
+import { LOG_IN, LOG_OUT, ERROR_LOGIN } from "../types/Types";
 
 export const loginAction = (user, password) => {
   return async (dispatch) => {
@@ -10,9 +10,14 @@ export const loginAction = (user, password) => {
       dispatch(loggin({ data, status }));
     } catch (error) {
       console.log(error);
+      dispatch(handleErrorLogin());
     }
   };
 };
+
+export const handleErrorLogin = () => ({
+  type: ERROR_LOGIN,
+});
 
 export const loggin = (data) => ({
   type: LOG_IN,

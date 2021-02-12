@@ -1,4 +1,9 @@
-import { FETCH_STUDENTS_DATA, FETCH_ALL_DATA } from "../types/Types";
+import {
+  FETCH_STUDENTS_DATA,
+  FETCH_ALL_DATA,
+  FETCH_CHARACTER,
+  BACK_HOME,
+} from "../types/Types";
 import axios from "axios";
 
 export const fetchStudentData = () => {
@@ -39,4 +44,13 @@ export const fetchAllData = () => {
 export const allData = (data) => ({
   type: FETCH_ALL_DATA,
   payload: data,
+});
+
+export const fetchCaracter = (data) => ({
+  type: FETCH_CHARACTER,
+  payload: data,
+});
+
+export const backHome = () => ({
+  type: BACK_HOME,
 });
